@@ -7,7 +7,7 @@ const Input = ({ value, onChange, type, name, id, label }) => {
       <input
         type={type}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         name={name}
         id={id}
       />

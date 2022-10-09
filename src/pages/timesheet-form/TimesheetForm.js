@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
-import Input from "../../components/Input";
 import RadioButton from "../../components/RadioButton";
 import TextArea from "../../components/Textarea";
 import DatePicker from "react-date-picker";
