@@ -22,9 +22,10 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route path="add" element={<TimesheetForm />} />
+          {/* <Route path="add" element={<TimesheetForm />} /> */}
           {/* <Route path=":id" element={<UserProfile />} /> */}
         </Route>
+        <Route path="timesheet/add" element={<TimesheetForm />} />
       </Routes>
     </BrowserRouter>
   );
