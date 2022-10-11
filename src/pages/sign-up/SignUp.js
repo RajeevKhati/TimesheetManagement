@@ -10,8 +10,6 @@ const SignUp = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
     signUp(email, password);
   };
 

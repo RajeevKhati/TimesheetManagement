@@ -17,8 +17,6 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      console.log(email);
-      console.log(password);
       navigate(redirectPath, { replace: true });
     } catch (err) {
       console.log("failed to login ", err);

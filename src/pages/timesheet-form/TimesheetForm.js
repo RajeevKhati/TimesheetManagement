@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import RadioButton from "../../components/RadioButton";
@@ -7,6 +7,7 @@ import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import { convertDateToString } from "../../utils/helper";
 import { useDB } from "../../contexts/DBContext";
+import { IN_PROCESS } from "../../utils/constants";
 
 const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
@@ -16,6 +17,7 @@ const TimesheetForm = () => {
   const [endTime, setEndTime] = useState("10:00");
   const [desc, setDesc] = useState("");
   const { addTimesheet } = useDB();
+
   const toggle = () => {
     setIsWorkHoursChecked((prev) => !prev);
   };
@@ -24,10 +26,11 @@ const TimesheetForm = () => {
     const dateToString = convertDateToString(date);
     const submitData = {
       date: dateToString,
-      status: "inProcess",
+      status: IN_PROCESS,
       startTime,
       endTime,
       desc,
+      type: isWorkHoursChecked ? "workHours" : "leave",
     };
     addTimesheet(submitData);
   };

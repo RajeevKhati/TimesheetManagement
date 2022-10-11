@@ -16,6 +16,11 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  getDoc,
+  query,
+  collection,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -44,4 +49,9 @@ export {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  getDoc,
+  query,
+  collection,
+  where,
+  getDocs,
 };
