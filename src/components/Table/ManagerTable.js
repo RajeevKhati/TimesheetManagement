@@ -1,6 +1,8 @@
 import React from "react";
+import { APPROVE, REJECT } from "../../utils/constants";
+import Button from "../Button";
 
-const ManagerTable = ({ employees }) => {
+const ManagerTable = ({ employees, handleManagerAction }) => {
   return (
     <table className="table-auto">
       <thead>
@@ -11,9 +13,9 @@ const ManagerTable = ({ employees }) => {
         </tr>
       </thead>
       <tbody>
-        {employees?.map((emp) => {
+        {employees?.map((emp, index) => {
           return (
-            <tr key={emp.uid}>
+            <tr key={`${emp.employee.uid}-${index}`}>
               <td>{emp.employee.displayName}</td>
               <td>{emp.employee.email}</td>
               {emp?.data?.map(
@@ -24,7 +26,33 @@ const ManagerTable = ({ employees }) => {
                     <td>{startTime}</td>
                     <td>{endTime}</td>
                     <td>{desc}</td>
-                    <td>{status}</td>
+                    <td>
+                      {status}
+                      {status === "inProcess" && (
+                        <>
+                          <Button
+                            text={"Approve"}
+                            onClick={() =>
+                              handleManagerAction(
+                                emp.employee.uid,
+                                date,
+                                APPROVE
+                              )
+                            }
+                          />
+                          <Button
+                            text={"Reject"}
+                            onClick={() =>
+                              handleManagerAction(
+                                emp.employee.uid,
+                                date,
+                                REJECT
+                              )
+                            }
+                          />
+                        </>
+                      )}
+                    </td>
                   </React.Fragment>
                 )
               )}

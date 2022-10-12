@@ -9,7 +9,7 @@ import { useDB } from "../../contexts/DBContext";
 const ViewTimesheet = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const { timesheetList, employees, isManager } = useDB();
+  const { timesheetList, employees, isManager, approveTimesheet } = useDB();
 
   const handleLogout = async () => {
     try {
@@ -20,16 +20,25 @@ const ViewTimesheet = () => {
     }
   };
 
+  const handleManagerAction = (empUid, date, status) => {
+    approveTimesheet(empUid, date, status);
+  };
+
   const getTable = () => {
     if (isManager) {
-      return <ManagerTable employees={employees} />;
+      return (
+        <ManagerTable
+          employees={employees}
+          handleManagerAction={handleManagerAction}
+        />
+      );
     } else {
       return <EmployeeTable timesheetList={timesheetList} />;
     }
   };
   return (
     <div>
-      {getTable()}
+      {(timesheetList || employees) && getTable()}
       <Button text={"Logout"} onClick={handleLogout} />
       <Link to="add">Add Timesheet</Link>
     </div>
