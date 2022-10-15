@@ -1,10 +1,10 @@
 import React from "react";
 import { APPROVE, REJECT } from "../../utils/constants";
-import Button from "../Button";
+import { Button, Table } from "react-bootstrap";
 
 const ManagerTable = ({ employees, handleManagerAction }) => {
   return (
-    <table className="table-auto">
+    <Table striped bordered hover size="sm">
       <thead>
         <tr>
           <th>Employee Name</th>
@@ -31,7 +31,7 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                       {status === "inProcess" && (
                         <>
                           <Button
-                            text={"Approve"}
+                            variant="success"
                             onClick={() =>
                               handleManagerAction(
                                 emp.employee.uid,
@@ -39,9 +39,11 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                                 APPROVE
                               )
                             }
-                          />
+                          >
+                            Approve
+                          </Button>
                           <Button
-                            text={"Reject"}
+                            variant="danger"
                             onClick={() =>
                               handleManagerAction(
                                 emp.employee.uid,
@@ -49,7 +51,9 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                                 REJECT
                               )
                             }
-                          />
+                          >
+                            Reject
+                          </Button>
                         </>
                       )}
                     </td>
@@ -60,7 +64,7 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
           );
         })}
       </tbody>
-    </table>
+    </Table>
   );
 };
 

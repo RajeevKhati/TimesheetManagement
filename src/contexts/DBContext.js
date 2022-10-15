@@ -26,7 +26,7 @@ const DBProvider = ({ children }) => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async(user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         if (user.email === "admin@tsm.com") {
           //this is manager, fill employees array

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
+import { Button } from "react-bootstrap";
 import EmployeeTable from "../../components/Table/EmployeeTable";
 import ManagerTable from "../../components/Table/ManagerTable";
 import { useAuth } from "../../contexts/AuthContext";
@@ -39,8 +39,12 @@ const ViewTimesheet = () => {
   return (
     <div>
       {(timesheetList || employees) && getTable()}
-      <Button text={"Logout"} onClick={handleLogout} />
-      <Link to="add">Add Timesheet</Link>
+      <Button variant="danger" onClick={handleLogout}>
+        Logout
+      </Button>
+      <Link to="add">
+        <Button variant="primary">Add Timesheet</Button>
+      </Link>
     </div>
   );
 };

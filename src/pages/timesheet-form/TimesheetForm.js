@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
-import Card from "../../components/Card";
-import RadioButton from "../../components/RadioButton";
-import TextArea from "../../components/Textarea";
+import React, { useState } from "react";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import { convertDateToString } from "../../utils/helper";
 import { useDB } from "../../contexts/DBContext";
 import { IN_PROCESS } from "../../utils/constants";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
@@ -35,47 +32,85 @@ const TimesheetForm = () => {
     addTimesheet(submitData);
   };
   return (
-    <Card>
-      <form className="flex flex-col" onSubmit={onSubmit}>
-        <div className="flex">
-          <RadioButton
-            name="formType"
-            isChecked={isWorkHoursChecked}
-            label="Work Hours"
-            value={"workHours"}
-            onChange={toggle}
+    <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>
+      <p class="fs-2 text-center">Add Timesheet</p>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className="mb-3">
+          <Row>
+            <Col>
+              <Form.Check
+                type="radio"
+                id="Work Hours"
+                label="Work Hours"
+                name="formType"
+                checked={isWorkHoursChecked}
+                value={"workHours"}
+                onChange={toggle}
+              />
+            </Col>
+            <Col>
+              <Form.Check
+                type="radio"
+                id="Leave"
+                label="Leave"
+                name="formType"
+                checked={!isWorkHoursChecked}
+                value={"leave"}
+                onChange={toggle}
+              />
+            </Col>
+          </Row>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="date" style={{ marginRight: 10 }}>
+            Date
+          </Form.Label>
+          <DatePicker
+            onChange={setDate}
+            value={date}
+            name="date"
+            format="dd-MM-y"
+            id="date"
           />
-          <RadioButton
-            name="formType"
-            isChecked={!isWorkHoursChecked}
-            label="Leave"
-            value={"leave"}
-            onChange={toggle}
+        </Form.Group>
+        <Row>
+          <Form.Group as={Col} className="mb-3">
+            <Form.Label htmlFor="startTime">Start Time</Form.Label>
+            <TimePicker
+              value={startTime}
+              name="startTime"
+              onChange={setStartTime}
+              id="startTime"
+            />
+          </Form.Group>
+          <Form.Group as={Col} className="mb-3">
+            <Form.Label htmlFor="endTime">End Time</Form.Label>
+            <TimePicker
+              value={endTime}
+              name="endTime"
+              id="endTime"
+              onChange={setEndTime}
+            />
+          </Form.Group>
+        </Row>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="description">Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+            placeholder="Description"
+            label="Description"
+            id="description"
           />
-        </div>
-        <DatePicker
-          onChange={setDate}
-          value={date}
-          name="date"
-          format="dd-MM-y"
-        />
-        <TimePicker
-          value={startTime}
-          name="startTime"
-          onChange={setStartTime}
-        />
-        <TimePicker value={endTime} name="endTime" onChange={setEndTime} />
-        <TextArea
-          value={desc}
-          type="text"
-          name="desc"
-          onChange={(e) => setDesc(e.target.value)}
-          id="desc"
-          label="Description"
-        />
-        <Button text={"save"} onClick={() => {}} />
-      </form>
-    </Card>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Save
+        </Button>
+      </Form>
+    </div>
   );
 };
 
