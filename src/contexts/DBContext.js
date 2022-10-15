@@ -37,6 +37,10 @@ const DBProvider = ({ children }) => {
           await getTimesheet();
           setIsManager(false);
         }
+      } else {
+        setTimesheetList(null);
+        setEmployees(null);
+        setIsManager(false);
       }
     });
     return unsubscribe;
@@ -72,6 +76,7 @@ const DBProvider = ({ children }) => {
   };
 
   const getTimesheet = async () => {
+    if (!currentUser) return null;
     const uid = currentUser.uid;
     const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
     const employeeTimesheets = await getDoc(employeeRef);

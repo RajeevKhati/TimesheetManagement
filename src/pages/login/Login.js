@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>
-      <p class="fs-2 text-center">Login</p>
+      <p className="fs-2 text-center">Login</p>
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
