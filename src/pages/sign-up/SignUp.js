@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signUp } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    signUp(email, password);
+    await signUp(email, password);
+    navigate("/", { replace: true });
   };
 
   return (
     <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>
-      <p class="fs-2 text-center">Sign Up</p>
+      <p className="fs-2 text-center">Sign Up</p>
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
