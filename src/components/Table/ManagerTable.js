@@ -44,21 +44,27 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                     {status === "inProcess" && (
                       <>
                         <Button
-                        style={{ marginRight: 4, marginBottom:4, marginTop:4 }}
+                          style={{
+                            marginRight: 4,
+                            marginBottom: 4,
+                            marginTop: 4,
+                          }}
                           variant="success"
                           size="sm"
-                          onClick={() =>
-                            handleManagerAction(employee.uid, date, APPROVE)
-                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleManagerAction(employee.uid, date, APPROVE);
+                          }}
                         >
                           Approve
                         </Button>
                         <Button
                           variant="danger"
                           size="sm"
-                          onClick={() =>
-                            handleManagerAction(employee.uid, date, REJECT)
-                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleManagerAction(employee.uid, date, REJECT);
+                          }}
                         >
                           Reject
                         </Button>
@@ -114,7 +120,8 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
     return (
       <React.Fragment key={employee.uid}>
         <p>
-          {employee?.displayName && `Employee Name : ${employee?.displayName}`}{" "}
+          {employee?.displayName && `Employee Name : ${employee?.displayName}`}
+          {", "}
           {employee?.email && `Employee Email : ${employee?.email}`}
         </p>
         {renderTable(emp)}

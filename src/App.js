@@ -14,6 +14,7 @@ import Home from "./pages/home/Home";
 import { Container, Navbar } from "react-bootstrap";
 import { useAuth } from "./contexts/AuthContext";
 import { Logout } from "./components/Logout";
+import PhoneSignUp from "./pages/phone-sign-up/PhoneSignUp";
 
 function App() {
   const { currentUser } = useAuth();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/" element={<Home />} /> {/**Only Redirecting */}
         <Route path="login" element={<Login />} />
         <Route path="signUp" element={<SignUp />} />
+        <Route path="phoneSignUp" element={<PhoneSignUp/>} />
         <Route
           path="timesheet"
           element={

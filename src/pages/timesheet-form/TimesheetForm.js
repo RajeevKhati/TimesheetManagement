@@ -6,6 +6,7 @@ import { useDB } from "../../contexts/DBContext";
 import { IN_PROCESS } from "../../utils/constants";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
@@ -17,6 +18,7 @@ const TimesheetForm = () => {
   const [file, setFile] = useState();
   const { addTimesheet } = useDB();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const toggle = () => {
     setIsWorkHoursChecked((prev) => !prev);
@@ -25,7 +27,7 @@ const TimesheetForm = () => {
     setFile(event.target.files[0]);
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const dateToString = convertDateToString(date);
     const submitData = {
@@ -40,7 +42,12 @@ const TimesheetForm = () => {
       submitData.fileName = `${currentUser.uid}-${file.name}`;
       submitData.file = file;
     }
-    addTimesheet(submitData);
+    try {
+      await addTimesheet(submitData);
+      navigate("/timesheet");
+    } catch (err) {
+      console.log("timesheet form submit error => ", err);
+    }
   };
   return (
     <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>

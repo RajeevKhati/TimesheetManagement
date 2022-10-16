@@ -64,13 +64,14 @@ const DBProvider = ({ children }) => {
     const { displayName, email } = currentUser;
     const employeeSnap = await getDoc(employeeRef);
     if (employeeSnap.exists()) {
-      return updateDoc(employeeRef, finalData);
+      await updateDoc(employeeRef, finalData);
     } else {
-      return setDoc(employeeRef, {
+      await setDoc(employeeRef, {
         ...finalData,
         employee: { displayName, email, uid },
       });
     }
+    return getTimesheet(currentUser)
   };
 
   const editTimesheet = (data) => {
@@ -87,7 +88,7 @@ const DBProvider = ({ children }) => {
     const uid = currentUser.uid;
     const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
     const employeeTimesheets = await getDoc(employeeRef);
-    setTimesheetList(employeeTimesheets.data().data);
+    setTimesheetList(employeeTimesheets.data()?.data);
   };
 
   //will only be used by manager

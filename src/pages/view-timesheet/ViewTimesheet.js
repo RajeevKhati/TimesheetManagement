@@ -21,29 +21,26 @@ const ViewTimesheet = () => {
         />
       );
     }
-    return null;
+    return <div>No employees timehseet pending</div>;
   };
 
   const renderEmployeeContent = () => {
-    if (timesheetList) {
-      return (
-        <>
-          <Stack direction="horizontal" style={{ marginBottom: 10 }}>
-            <p
-              className="fs-5"
-              style={{ marginTop: "auto", marginBottom: "auto" }}
-            >
-              View Timesheet
-            </p>
-            <Link className="ms-auto" to="add">
-              <Button variant="primary">Add Timesheet</Button>
-            </Link>
-          </Stack>
-          <EmployeeTable timesheetList={timesheetList} />
-        </>
-      );
-    }
-    return null;
+    return (
+      <>
+        <Stack direction="horizontal" style={{ marginBottom: 10 }}>
+          <p
+            className="fs-5"
+            style={{ marginTop: "auto", marginBottom: "auto" }}
+          >
+            View Timesheet
+          </p>
+          <Link className="ms-auto" to="add">
+            <Button variant="primary">Add Timesheet</Button>
+          </Link>
+        </Stack>
+        <EmployeeTable timesheetList={timesheetList} />
+      </>
+    );
   };
 
   return (

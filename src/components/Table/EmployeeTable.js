@@ -12,6 +12,8 @@ const EmployeeTable = ({ timesheetList }) => {
     setShow(true);
   };
 
+  if (!timesheetList || timesheetList?.length <= 0) return null;
+
   return (
     <>
       <Table striped bordered hover size="sm">

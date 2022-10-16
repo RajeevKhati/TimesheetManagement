@@ -8,6 +8,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -36,6 +38,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
+auth.languageCode = 'it';
+
+export const provider = new GoogleAuthProvider();
+
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 // Initialize Cloud Storage and get a reference to the service
@@ -55,5 +61,6 @@ export {
   getDocs,
   ref,
   uploadBytes,
-  getDownloadURL
+  getDownloadURL,
+  signInWithPopup,
 };
