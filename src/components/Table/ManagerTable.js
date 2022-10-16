@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { APPROVE, REJECT } from "../../utils/constants";
 import { Button, Modal, Stack, Table } from "react-bootstrap";
+import useDownloadFile from "../../utils/useDownloadFile";
 
 const ManagerTable = ({ employees, handleManagerAction }) => {
   const [show, setShow] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const { downloadFile } = useDownloadFile();
 
   const handleClose = () => setShow(false);
 
@@ -42,6 +44,7 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                     {status === "inProcess" && (
                       <>
                         <Button
+                        style={{ marginRight: 4, marginBottom:4, marginTop:4 }}
                           variant="success"
                           size="sm"
                           onClick={() =>
@@ -51,7 +54,6 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
                           Approve
                         </Button>
                         <Button
-                        style={{marginLeft:4}}
                           variant="danger"
                           size="sm"
                           onClick={() =>
@@ -87,6 +89,19 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
               <p className="fs-5">End time : {modalData?.endTime}</p>
               <p className="fs-5">Description : {modalData?.desc}</p>
               <p className="fs-5">Status : {modalData?.status}</p>
+              {modalData?.fileName && (
+                <p className="fs-5">
+                  Leave Email : {modalData.fileName.split("-").pop()}{" "}
+                  <Button
+                    style={{ marginLeft: 4 }}
+                    variant="success"
+                    size="sm"
+                    onClick={() => downloadFile(modalData.fileName)}
+                  >
+                    Download
+                  </Button>{" "}
+                </p>
+              )}
             </Stack>
           </Modal.Body>
         </Modal>
@@ -97,15 +112,16 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
   const renderEmployee = (emp, index) => {
     const { employee } = emp;
     return (
-      <>
+      <React.Fragment key={employee.uid}>
         <p>
-          {employee?.displayName && `Name : ${employee?.displayName}`}{" "}
-          {employee?.email && `Email : ${employee?.email}`}
+          {employee?.displayName && `Employee Name : ${employee?.displayName}`}{" "}
+          {employee?.email && `Employee Email : ${employee?.email}`}
         </p>
         {renderTable(emp)}
-      </>
+      </React.Fragment>
     );
   };
+
   return employees?.map(renderEmployee);
 };
 

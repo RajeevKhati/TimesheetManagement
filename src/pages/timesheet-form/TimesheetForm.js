@@ -5,6 +5,7 @@ import { convertDateToString } from "../../utils/helper";
 import { useDB } from "../../contexts/DBContext";
 import { IN_PROCESS } from "../../utils/constants";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext";
 
 const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
@@ -13,11 +14,17 @@ const TimesheetForm = () => {
   const [startTime, setStartTime] = useState("10:00");
   const [endTime, setEndTime] = useState("10:00");
   const [desc, setDesc] = useState("");
+  const [file, setFile] = useState();
   const { addTimesheet } = useDB();
+  const { currentUser } = useAuth();
 
   const toggle = () => {
     setIsWorkHoursChecked((prev) => !prev);
   };
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     const dateToString = convertDateToString(date);
@@ -29,11 +36,15 @@ const TimesheetForm = () => {
       desc,
       type: isWorkHoursChecked ? "workHours" : "leave",
     };
+    if (!isWorkHoursChecked && file) {
+      submitData.fileName = `${currentUser.uid}-${file.name}`;
+      submitData.file = file;
+    }
     addTimesheet(submitData);
   };
   return (
     <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>
-      <p class="fs-2 text-center">Add Timesheet</p>
+      <p className="fs-2 text-center">Add Timesheet</p>
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3">
           <Row>
@@ -76,7 +87,9 @@ const TimesheetForm = () => {
         </Form.Group>
         <Row>
           <Form.Group as={Col} className="mb-3">
-            <Form.Label htmlFor="startTime">Start Time</Form.Label>
+            <Form.Label htmlFor="startTime" style={{ marginRight: 10 }}>
+              Start Time
+            </Form.Label>
             <TimePicker
               value={startTime}
               name="startTime"
@@ -85,7 +98,9 @@ const TimesheetForm = () => {
             />
           </Form.Group>
           <Form.Group as={Col} className="mb-3">
-            <Form.Label htmlFor="endTime">End Time</Form.Label>
+            <Form.Label htmlFor="endTime" style={{ marginRight: 10 }}>
+              End Time
+            </Form.Label>
             <TimePicker
               value={endTime}
               name="endTime"
@@ -106,6 +121,14 @@ const TimesheetForm = () => {
             id="description"
           />
         </Form.Group>
+
+        {!isWorkHoursChecked && (
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Upload leave email</Form.Label>
+            <Form.Control type="file" onChange={handleChange} />
+          </Form.Group>
+        )}
+
         <Button variant="primary" type="submit">
           Save
         </Button>

@@ -7,12 +7,13 @@ import {
   db,
   updateDoc,
   arrayUnion,
-  arrayRemove,
   getDoc,
   query,
   collection,
-  where,
   getDocs,
+  storage,
+  ref,
+  uploadBytes,
 } from "../firebase";
 import { COLLECTION_EMPLOYEES } from "../utils/constants";
 import { useAuth } from "./AuthContext";
@@ -34,7 +35,7 @@ const DBProvider = ({ children }) => {
           setIsManager(true);
         } else {
           //this is an employee, fill timesheetList
-          await getTimesheet();
+          await getTimesheet(user);
           setIsManager(false);
         }
       } else {
@@ -48,11 +49,18 @@ const DBProvider = ({ children }) => {
 
   const addTimesheet = async (data) => {
     const uid = currentUser.uid;
+    if (data.fileName) {
+      const { file, ...restData } = data;
+      data = restData;
+      const fileRef = ref(storage, `leaveEmails/${data.fileName}`);
+      uploadBytes(fileRef, file).then((snapshot) => {
+        console.log("Uploaded a file!");
+      });
+    }
     const finalData = {
       data: arrayUnion(data),
     };
     const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
-    console.log(currentUser);
     const { displayName, email } = currentUser;
     const employeeSnap = await getDoc(employeeRef);
     if (employeeSnap.exists()) {
@@ -75,8 +83,7 @@ const DBProvider = ({ children }) => {
     // return updateDoc(employeeRef, finalData);
   };
 
-  const getTimesheet = async () => {
-    if (!currentUser) return null;
+  const getTimesheet = async (currentUser) => {
     const uid = currentUser.uid;
     const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
     const employeeTimesheets = await getDoc(employeeRef);
