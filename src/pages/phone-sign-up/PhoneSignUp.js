@@ -4,7 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { useUserAuth } from "../context/UserAuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const PhoneSignUp = () => {
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ const PhoneSignUp = () => {
   const [flag, setFlag] = useState(false);
   const [otp, setOtp] = useState("");
   const [result, setResult] = useState("");
-  const { setUpRecaptha } = useUserAuth();
+  const { setUpRecaptcha } = useAuth();
   const navigate = useNavigate();
 
   const getOtp = async (e) => {
@@ -22,7 +22,7 @@ const PhoneSignUp = () => {
     if (number === "" || number === undefined)
       return setError("Please enter a valid phone number!");
     try {
-      const response = await setUpRecaptha(number);
+      const response = await setUpRecaptcha(number);
       setResult(response);
       setFlag(true);
     } catch (err) {
@@ -36,7 +36,7 @@ const PhoneSignUp = () => {
     if (otp === "" || otp === null) return;
     try {
       await result.confirm(otp);
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }

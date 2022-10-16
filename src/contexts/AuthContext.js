@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
 } from "../firebase";
 
 const AuthContext = React.createContext();
@@ -47,12 +49,23 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider)
   };
 
+  function setUpRecaptcha(number) {
+    const recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {},
+      auth
+    );
+    recaptchaVerifier.render();
+    return signInWithPhoneNumber(auth, number, recaptchaVerifier);
+  }
+
   const value = {
     currentUser,
     signUp,
     login,
     logout,
-    loginWithGoogle
+    loginWithGoogle,
+    setUpRecaptcha
   };
   return (
     <AuthContext.Provider value={value}>

@@ -10,6 +10,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -38,7 +40,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
-auth.languageCode = 'it';
+auth.languageCode = "it";
 
 export const provider = new GoogleAuthProvider();
 
@@ -63,4 +65,6 @@ export {
   uploadBytes,
   getDownloadURL,
   signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
 };
