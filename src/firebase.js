@@ -40,7 +40,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
-auth.languageCode = "it";
+auth.languageCode = "en";
 
 export const provider = new GoogleAuthProvider();
 
