@@ -21,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar>
+      <Navbar bg="primary" variant="dark" className="mb-3">
         <Container>
           <Navbar.Brand as={Link} to="/">
             Timesheet
@@ -57,38 +57,3 @@ function App() {
 }
 
 export default App;
-
-// This is a React Router v6 app
-// import {
-//   BrowserRouter,
-//   Routes,
-//   Route,
-//   Link,
-//   Outlet,
-// } from "react-router-dom";
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="users" element={<Users />}>
-//           <Route path="me" element={<OwnUserProfile />} />
-//           <Route path=":id" element={<UserProfile />} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
-
-// function Users() {
-//   return (
-//     <div>
-//       <nav>
-//         <Link to="me">My Profile</Link>
-//       </nav>
-
-//       <Outlet />
-//     </div>
-//   );
-// }

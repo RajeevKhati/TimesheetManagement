@@ -12,8 +12,8 @@ const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
   // const [date, setDate] = useState(new Date(2018, 11, 24));
   const [date, setDate] = useState(new Date("12-5-2019")); //new date accepts date in format mm-dd-y
-  const [startTime, setStartTime] = useState("10:00");
-  const [endTime, setEndTime] = useState("10:00");
+  const [startTime, setStartTime] = useState("9:00");
+  const [endTime, setEndTime] = useState("18:00");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState();
   const { addTimesheet } = useDB();
@@ -50,7 +50,10 @@ const TimesheetForm = () => {
     }
   };
   return (
-    <div className="container-md" style={{ maxWidth: 400, marginTop: 20 }}>
+    <div
+      className="container-md"
+      style={{ maxWidth: 400, paddingTop: 20, paddingBottom: 20 }}
+    >
       <p className="fs-2 text-center">Add Timesheet</p>
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3">

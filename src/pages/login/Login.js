@@ -56,16 +56,17 @@ const Login = () => {
             required={true}
           />
         </Form.Group>
-        <Button
-          style={{ marginRight: 20, marginBottom: 10 }}
-          variant="primary"
-          type="submit"
-        >
-          Login
-        </Button>
         <div>
           <Button
-            style={{ marginRight: 20, marginBottom: 10 }}
+            style={{ marginRight: 10, marginBottom: 10 }}
+            variant="primary"
+            type="submit"
+          >
+            Login
+          </Button>
+
+          <Button
+            style={{ marginRight: 10, marginBottom: 10 }}
             variant="primary"
             type="submit"
             onClick={handleGoogleLogin}
@@ -77,7 +78,7 @@ const Login = () => {
           <Button
             as={Link}
             to={"/phoneSignUp"}
-            style={{ marginRight: 20, marginBottom: 10 }}
+            style={{ marginRight: 10, marginBottom: 10 }}
             variant="primary"
             type="submit"
           >

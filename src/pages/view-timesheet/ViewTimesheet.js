@@ -32,10 +32,10 @@ const ViewTimesheet = () => {
             className="fs-5"
             style={{ marginTop: "auto", marginBottom: "auto" }}
           >
-            View Timesheet
+            Timesheet List
           </p>
           <Link className="ms-auto" to="add">
-            <Button variant="primary">Add Timesheet</Button>
+            <Button variant="primary">Add</Button>
           </Link>
         </Stack>
         <EmployeeTable timesheetList={timesheetList} />

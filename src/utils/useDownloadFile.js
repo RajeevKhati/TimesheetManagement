@@ -4,8 +4,6 @@ const useDownloadFile = () => {
   const downloadFile = (fileName) => {
     getDownloadURL(ref(storage, `leaveEmails/${fileName}`))
       .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
-
         // This can be downloaded directly:
         const xhr = new XMLHttpRequest();
         xhr.responseType = "blob";
@@ -18,10 +16,6 @@ const useDownloadFile = () => {
         };
         xhr.open("GET", url);
         xhr.send();
-
-        // Or inserted into an <img> element
-        const img = document.getElementById("myimg");
-        img.setAttribute("src", url);
       })
       .catch((error) => {
         // Handle any errors
