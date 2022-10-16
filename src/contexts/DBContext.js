@@ -61,27 +61,17 @@ const DBProvider = ({ children }) => {
       data: arrayUnion(data),
     };
     const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
-    const { displayName, email } = currentUser;
+    const { displayName, email, phoneNumber } = currentUser;
     const employeeSnap = await getDoc(employeeRef);
     if (employeeSnap.exists()) {
       await updateDoc(employeeRef, finalData);
     } else {
       await setDoc(employeeRef, {
         ...finalData,
-        employee: { displayName, email, uid },
+        employee: { displayName, email, uid, phoneNumber },
       });
     }
-    return getTimesheet(currentUser)
-  };
-
-  const editTimesheet = (data) => {
-    // const uid = currentUser.uid;
-    // const finalData = {
-    //   status: "inProcess",
-    //   data: arrayUnion(data),
-    // };
-    // const employeeRef = doc(db, COLLECTION_EMPLOYEES, uid);
-    // return updateDoc(employeeRef, finalData);
+    return getTimesheet(currentUser);
   };
 
   const getTimesheet = async (currentUser) => {
@@ -118,7 +108,6 @@ const DBProvider = ({ children }) => {
     //for employees
     timesheetList,
     addTimesheet,
-    editTimesheet,
     getTimesheet,
     //for manager
     employees,

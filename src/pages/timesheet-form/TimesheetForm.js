@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 const TimesheetForm = () => {
   const [isWorkHoursChecked, setIsWorkHoursChecked] = useState(true);
-  // const [date, setDate] = useState(new Date(2018, 11, 24));
   const [date, setDate] = useState(new Date("12-5-2019")); //new date accepts date in format mm-dd-y
   const [startTime, setStartTime] = useState("9:00");
   const [endTime, setEndTime] = useState("18:00");

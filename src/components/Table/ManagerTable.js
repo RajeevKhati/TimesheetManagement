@@ -120,9 +120,10 @@ const ManagerTable = ({ employees, handleManagerAction }) => {
     return (
       <React.Fragment key={employee.uid}>
         <p>
-          {employee?.displayName && `Employee Name : ${employee?.displayName}`}
-          {", "}
-          {employee?.email && `Employee Email : ${employee?.email}`}
+          {employee?.displayName &&
+            `Employee Name : ${employee?.displayName}, `}
+          {employee?.email && `Employee Email : ${employee?.email}, `}
+          {employee?.phoneNumber && `Employee Phone : ${employee?.phoneNumber}`}
         </p>
         {renderTable(emp)}
       </React.Fragment>
