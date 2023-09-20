@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Hosted Link
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Timesheet Management](https://timesheetmanagement-bb78a.firebaseapp.com/).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### `Login Screen`
 
-### `npm start`
+User can login using email/password, google auth, phone number
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `SignUp screen`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+User can create account with email/password.
 
-### `npm test`
+### `Employee`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**View Timesheet screen**
+1. employee can view their timesheet and can see status if its inProcess or approve or reject.
+2. clicking on row opens a modal and shows the whole detail along with description, start time, end time.
 
-### `npm run build`
+**Add timesheet screen**
+1. employee can choose work hours or leave from radio button.
+2. choosing leave gives an extra option to upload leave email.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Manager`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**View Screen**
+1. Manager can see list of employees and their respective timesheets.
+2. Manager can approve, reject timesheet.
+3. once manager approves or reject timesheet, manager can't see that particular timesheet anymore(to reduce the clutter).
+4. clicking on a particular opens a modal which shows more details about that particular timesheet.
