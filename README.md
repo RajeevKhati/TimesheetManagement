@@ -1,6 +1,6 @@
 # Hosted Link
 
-[Timesheet Management](https://timesheetmanagement-bb78a.firebaseapp.com/).
+[Timesheet Management](https://timesheetmanagement-bb78a.firebaseapp.com/)
 
 ## Features
 
